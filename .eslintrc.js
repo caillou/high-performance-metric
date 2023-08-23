@@ -19,6 +19,7 @@ const jsAndTsRules = {
       'newlines-between': 'always',
     },
   ],
+  'import/prefer-default-export': 'off',
 };
 
 module.exports = {
