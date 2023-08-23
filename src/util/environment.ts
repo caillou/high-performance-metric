@@ -20,7 +20,7 @@ const parse = <T extends ZodRawShape>(zodObject: ZodObject<T>, env: unknown) => 
 };
 
 const serverEnvironmentSchema = z.object({
-
+  SUPABASE_SERVICE_ROLE_KEY: z.string(),
 });
 
 let serverEnvironmentMemo: z.infer<typeof serverEnvironmentSchema> | undefined;
@@ -34,7 +34,8 @@ export const serverEnvironment = () => {
 };
 
 const clientEnvironmentSchema = z.object({
-  NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
+  NEXT_PUBLIC_SUPABASE_URL: z.string(),
 });
 
 let clientEnvironmentMemo: z.infer<typeof clientEnvironmentSchema> | undefined;
@@ -45,7 +46,8 @@ export const clientEnvironment = () => {
   }
 
   clientEnvironmentMemo = parse(clientEnvironmentSchema, {
-    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   });
 
   return clientEnvironmentMemo;
